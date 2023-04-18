@@ -6,6 +6,8 @@ import {
   LogoutOutlined,
   PodcastsOutlined,
   StopCircleOutlined,
+  StopScreenShareOutlined,
+  ScreenShareOutlined,
 } from "@mui/icons-material";
 import { IconButton, Button } from "@mui/material";
 import {
@@ -15,6 +17,7 @@ import {
   selectIsLocalAudioEnabled,
   selectIsLocalVideoEnabled,
   selectLocalPeer,
+  selectPeerScreenSharing,
 } from "@100mslive/react-sdk";
 
 function Controls() {
@@ -24,6 +27,7 @@ function Controls() {
   const audioEnabled = useHMSStore(selectIsLocalAudioEnabled);
   const videoEnabled = useHMSStore(selectIsLocalVideoEnabled);
   const localPeer = useHMSStore(selectLocalPeer);
+  const enableScreenShare = useHMSStore(selectPeerScreenSharing);
 
   const startHLSStreaming = async () => {
     try {
@@ -50,9 +54,14 @@ function Controls() {
     await hmsActions.setLocalVideoEnabled(!videoEnabled);
   };
 
+  //TOGGLE SCREENSHARE
+  const toggleScreenShare = async () => {
+    await hmsActions.setScreenShareEnabled(!enableScreenShare);
+  };
+
   // LEAVE ROOM
   const leaveRoom = async () => {
-    if (localPeer.roleName === "broadcaster") {
+    if (localPeer.roleName === "player") {
       hmsActions.leave();
       await hmsActions.stopHLSStreaming();
     } else {
@@ -61,13 +70,20 @@ function Controls() {
   };
   return (
     <div className="controls">
-      {localPeer.roleName === "broadcaster" ? (
+      {localPeer.roleName === "player" ? (
         <>
           <IconButton onClick={toggleAudio}>
             {audioEnabled ? <MicNoneOutlined /> : <MicOffOutlined />}
           </IconButton>
           <IconButton onClick={toggleVideo}>
             {videoEnabled ? <VideocamOutlined /> : <VideocamOffOutlined />}
+          </IconButton>
+          <IconButton onClick={toggleScreenShare}>
+            {enableScreenShare ? (
+              <StopScreenShareOutlined />
+            ) : (
+              <ScreenShareOutlined />
+            )}
           </IconButton>
           <Button
             variant="contained"
@@ -77,7 +93,7 @@ function Controls() {
           >
             <LogoutOutlined /> Leave Room
           </Button>
-          {hlsState.running ? (
+          {/* {hlsState.running ? (
             <Button
               variant="contained"
               disableElevation
@@ -94,7 +110,7 @@ function Controls() {
             >
               <PodcastsOutlined /> Go Live
             </Button>
-          )}
+          )} */}
         </>
       ) : (
         <Button

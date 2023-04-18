@@ -6,7 +6,7 @@ function JoinRoom() {
   const ROOM_ID = process.env.REACT_APP_ROOM_ID;
 
   const [username, setUsername] = useState("");
-  const [selectedRole, setSelectedRole] = useState("broadcaster");
+  const [selectedRole, setSelectedRole] = useState("player");
 
   const hmsActions = useHMSActions();
   const handleSubmit = async (e) => {
@@ -15,7 +15,7 @@ function JoinRoom() {
       method: "POST",
       body: JSON.stringify({
         user_id: `${Date.now()}`,
-        role: selectedRole, //broadcaster, hls-viewer
+        role: selectedRole, //player, hls-viewer
         type: "app",
         room_id: ROOM_ID,
       }),
@@ -44,7 +44,7 @@ function JoinRoom() {
         onChange={(e) => setSelectedRole(e.target.value)}
         placeholder="Select Role"
       >
-        <option>broadcaster</option>
+        <option>player</option>
         <option>hls-viewer</option>
       </select>
       <button>Join</button>

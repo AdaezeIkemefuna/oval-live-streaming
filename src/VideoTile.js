@@ -5,17 +5,17 @@ export default function VideoTile({ peer, peers }) {
     trackId: peer.videoTrack,
   });
 
-  const numberOfBroadCasters = () => {
-    const broadcasters = peers.filter((peer) => {
-      return peer.roleName === "broadcaster";
+  const numberOfplayers = () => {
+    const players = peers.filter((peer) => {
+      return peer.roleName === "player";
     });
-    return broadcasters.length;
+    return players.length;
   };
 
   return (
     <video
       ref={videoRef}
-      className={numberOfBroadCasters() >= 2 ? "video" : ""}
+      className={numberOfplayers() >= 2 ? "video" : ""}
       autoPlay
       muted
       playsInline
