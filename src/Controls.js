@@ -78,12 +78,15 @@ function Controls() {
           <IconButton onClick={toggleVideo}>
             {videoEnabled ? <VideocamOutlined /> : <VideocamOffOutlined />}
           </IconButton>
-          <IconButton onClick={toggleScreenShare}>
+          {/* <IconButton onClick={toggleScreenShare}>
             {enableScreenShare ? (
               <StopScreenShareOutlined />
             ) : (
               <ScreenShareOutlined />
             )}
+          </IconButton> */}
+          <IconButton>
+            <StopScreenShareOutlined />
           </IconButton>
           <Button
             variant="contained"
