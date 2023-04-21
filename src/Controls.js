@@ -70,7 +70,8 @@ function Controls() {
   };
   return (
     <div className="controls">
-      {localPeer.roleName === "player" ? (
+      {/* BROADCASTER CONTROLS */}
+      {localPeer.roleName === "broadcaster" && (
         <>
           <IconButton onClick={toggleAudio}>
             {audioEnabled ? <MicNoneOutlined /> : <MicOffOutlined />}
@@ -78,16 +79,14 @@ function Controls() {
           <IconButton onClick={toggleVideo}>
             {videoEnabled ? <VideocamOutlined /> : <VideocamOffOutlined />}
           </IconButton>
-          {/* <IconButton onClick={toggleScreenShare}>
+          <IconButton onClick={toggleScreenShare}>
             {enableScreenShare ? (
               <StopScreenShareOutlined />
             ) : (
               <ScreenShareOutlined />
             )}
-          </IconButton> */}
-          <IconButton>
-            <StopScreenShareOutlined />
           </IconButton>
+
           <Button
             variant="contained"
             disableElevation
@@ -96,7 +95,7 @@ function Controls() {
           >
             <LogoutOutlined /> Leave Room
           </Button>
-          {/* {hlsState.running ? (
+          {hlsState.running ? (
             <Button
               variant="contained"
               disableElevation
@@ -113,9 +112,36 @@ function Controls() {
             >
               <PodcastsOutlined /> Go Live
             </Button>
-          )} */}
+          )}
         </>
-      ) : (
+      )}
+
+      {/* PLAYER CONTROLS */}
+      {localPeer.roleName === "player" && (
+        <>
+          <IconButton onClick={toggleAudio}>
+            {audioEnabled ? <MicNoneOutlined /> : <MicOffOutlined />}
+          </IconButton>
+          <IconButton onClick={toggleVideo}>
+            {videoEnabled ? <VideocamOutlined /> : <VideocamOffOutlined />}
+          </IconButton>
+
+          <IconButton>
+            <StopScreenShareOutlined />
+          </IconButton>
+          <Button
+            variant="contained"
+            disableElevation
+            className="leave"
+            onClick={leaveRoom}
+          >
+            <LogoutOutlined /> Leave Room
+          </Button>
+        </>
+      )}
+
+      {/* HLS-VIEWER CONTROLS */}
+      {localPeer.roleName === "hls-viewer" && (
         <Button
           variant="contained"
           disableElevation

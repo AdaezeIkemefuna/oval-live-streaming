@@ -7,7 +7,7 @@ export default function VideoTile({ peer, peers }) {
 
   const numberOfplayers = () => {
     const players = peers.filter((peer) => {
-      return peer.roleName === "player";
+      return peer.roleName === "player" || "broadcaster";
     });
     return players.length;
   };
