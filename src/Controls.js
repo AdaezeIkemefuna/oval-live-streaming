@@ -17,7 +17,7 @@ import {
   selectIsLocalAudioEnabled,
   selectIsLocalVideoEnabled,
   selectLocalPeer,
-  selectPeerScreenSharing,
+  selectPeersScreenSharing,
 } from "@100mslive/react-sdk";
 
 function Controls() {
@@ -27,7 +27,7 @@ function Controls() {
   const audioEnabled = useHMSStore(selectIsLocalAudioEnabled);
   const videoEnabled = useHMSStore(selectIsLocalVideoEnabled);
   const localPeer = useHMSStore(selectLocalPeer);
-  const enableScreenShare = useHMSStore(selectPeerScreenSharing);
+  const enableScreenShare = useHMSStore(selectPeersScreenSharing);
 
   const startHLSStreaming = async () => {
     try {
