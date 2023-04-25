@@ -15,7 +15,7 @@ export default function VideoTile({ peer, peers }) {
   return (
     <video
       ref={videoRef}
-      className={numberOfplayers() >= 2 ? "video" : ""}
+      className={numberOfplayers() > 2 ? "video" : ""}
       autoPlay
       muted
       playsInline

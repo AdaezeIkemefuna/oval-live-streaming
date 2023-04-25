@@ -56,9 +56,8 @@ function Controls() {
 
   //TOGGLE SCREENSHARE
   const toggleScreenShare = async () => {
-    await hmsActions.setScreenShareEnabled(!enableScreenShare);
+    await hmsActions.setScreenShareEnabled(enableScreenShare);
   };
-
   // LEAVE ROOM
   const leaveRoom = async () => {
     if (localPeer.roleName === "player") {
@@ -80,11 +79,7 @@ function Controls() {
             {videoEnabled ? <VideocamOutlined /> : <VideocamOffOutlined />}
           </IconButton>
           <IconButton onClick={toggleScreenShare}>
-            {enableScreenShare ? (
-              <StopScreenShareOutlined />
-            ) : (
-              <ScreenShareOutlined />
-            )}
+            <ScreenShareOutlined />
           </IconButton>
 
           <Button
@@ -119,16 +114,13 @@ function Controls() {
       {/* PLAYER CONTROLS */}
       {localPeer.roleName === "player" && (
         <>
-          <IconButton onClick={toggleAudio}>
-            {audioEnabled ? <MicNoneOutlined /> : <MicOffOutlined />}
+          <IconButton>
+            <MicOffOutlined />
           </IconButton>
-          <IconButton onClick={toggleVideo}>
-            {videoEnabled ? <VideocamOutlined /> : <VideocamOffOutlined />}
+          <IconButton>
+            <VideocamOffOutlined />
           </IconButton>
 
-          <IconButton>
-            <StopScreenShareOutlined />
-          </IconButton>
           <Button
             variant="contained"
             disableElevation
